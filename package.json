@@ -1,0 +1,44 @@
+{
+    "name": "coi-serviceworker",
+    "version": "0.1.0",
+    "description": "Service Worker to add COOP/COEP headers.",
+    "keywords": [
+        "jupyter",
+        "jupyterlab",
+        "jupyterlab-extension"
+    ],
+    "homepage": "https://github.com/jburgy/jupyter",
+    "bugs": {
+        "url": "https://github.com/jburgy/jupyter/issues"
+    },
+    "license": "BSD-3-Clause",
+    "author": {
+        "name": "Jan Burgy",
+        "email": "jburgy@gmail.com"
+    },
+    "files": [
+        "lib/*.js"
+    ],
+    "main": "lib/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jburgy/jupyter.git"
+    },
+    "scripts": {
+        "build:labextension": "jupyter labextension build .",
+        "build:labextension:dev": "jupyter labextension build --development True ."
+    },
+    "devDependencies": {
+        "@jupyterlab/builder": "^4.0.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "jupyterlab": {
+        "extension": true,
+        "outputDir": "coi_serviceworker/labextension"
+    },
+    "dependencies": {
+        "@jupyterlab/application": "^4.4.9"
+    }
+}
