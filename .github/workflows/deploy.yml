@@ -20,6 +20,7 @@ jobs:
       - run: |
           cp README.md content
           uv run jupyter lite build
+      - run: cp service-worker.js dist/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
