@@ -148,6 +148,8 @@ function withHeaders(response) {
     newHeaders.set("Cross-Origin-Embedder-Policy", "require-corp");
     newHeaders.set("Cross-Origin-Opener-Policy", "same-origin");
 
+    console.log("service-worker.js modified headers for ", response.url);
+
     return new Response(response.body, {
         status: response.status,
         statusText: response.statusText,
