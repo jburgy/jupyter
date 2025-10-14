@@ -90,7 +90,7 @@ async function maybeFromCache(event) {
     let response = /** type {Promise<Response> | null} */ null;
     if (!enableCache) {
         response = await fetch(request);
-        if (shouldAddHeaders(response.url))
+        if (shouldAddHeaders(response.status))
             response = withHeaders(response);
         return response;
     }
@@ -101,7 +101,7 @@ async function maybeFromCache(event) {
         event.waitUntil(refetch(request));
     } else {
         response = await fetch(request);
-        if (shouldAddHeaders(response.url))
+        if (shouldAddHeaders(response.status))
             response = withHeaders(response);
         event.waitUntil(updateCache(request, response.clone()));
     }
@@ -186,12 +186,11 @@ function shouldDrop(request, url) {
 }
 
 /**
- * @param {string} url
+ * @param {number} status
  * @returns {boolean}
  */
-function shouldAddHeaders(url) {
-    // return /sqlite3-opfs-async-proxy-[^.]+.js$|sqlite3-worker1-bundler-friendly-[^.]+.js$|widget.mjs$/.test(url);
-    return true;
+function shouldAddHeaders(status) {
+    return status !== 0;
 }
 
 /**
