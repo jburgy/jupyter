@@ -190,7 +190,8 @@ function shouldDrop(request, url) {
  * @returns {boolean}
  */
 function shouldAddHeaders(url) {
-    return /sqlite3-opfs-async-proxy-[^.]+.js$|sqlite3-worker1-bundler-friendly-[^.]+.js$|widget.mjs$/.test(url);
+    // return /sqlite3-opfs-async-proxy-[^.]+.js$|sqlite3-worker1-bundler-friendly-[^.]+.js$|widget.mjs$/.test(url);
+    return true;
 }
 
 /**
