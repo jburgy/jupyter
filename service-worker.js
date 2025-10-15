@@ -90,7 +90,7 @@ async function maybeFromCache(event) {
     let response = /** type {Promise<Response> | null} */ null;
     if (!enableCache) {
         response = await fetch(request);
-        if (shouldAddHeaders(response.status))
+        if (shouldAddHeaders(response.url))
             response = withHeaders(response);
         return response;
     }
@@ -101,7 +101,7 @@ async function maybeFromCache(event) {
         event.waitUntil(refetch(request));
     } else {
         response = await fetch(request);
-        if (shouldAddHeaders(response.status))
+        if (shouldAddHeaders(response.url))
             response = withHeaders(response);
         event.waitUntil(updateCache(request, response.clone()));
     }
@@ -144,16 +144,16 @@ async function refetch(request) {
  * @returns {Response}
  */
 function withHeaders(response) {
-    const newHeaders = new Headers(response.headers);
-    newHeaders.set("Cross-Origin-Embedder-Policy", "require-corp");
-    newHeaders.set("Cross-Origin-Opener-Policy", "same-origin");
+    const headers = new Headers(response.headers);
+    headers.set("Cross-Origin-Embedder-Policy", "require-corp");
+    headers.set("Cross-Origin-Opener-Policy", "same-origin");
 
-    console.log("service-worker.js modified headers for ", response.url);
+    console.log("service-worker.js modified headers for", response.url);
 
     return new Response(response.body, {
         status: response.status,
         statusText: response.statusText,
-        headers: newHeaders,
+        headers: headers,
     });
 }
 
@@ -186,11 +186,11 @@ function shouldDrop(request, url) {
 }
 
 /**
- * @param {number} status
+ * @param {string} url
  * @returns {boolean}
  */
-function shouldAddHeaders(status) {
-    return status !== 0;
+function shouldAddHeaders(url) {
+    return /widget.mjs$/.test(url);
 }
 
 /**
