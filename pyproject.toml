@@ -17,3 +17,8 @@ dependencies = [
     "notebook>=7.4.5",
     "plotly>=6.3.0",
 ]
+
+[dependency-groups]
+dev = [
+    "scipy>=1.16.2",
+]
