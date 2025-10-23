@@ -22,3 +22,9 @@ dependencies = [
 dev = [
     "scipy>=1.16.2",
 ]
+
+[tool.ruff]
+exclude = [
+    "content/pyodide/",
+    "content/python.ipynb",
+]

@@ -17,6 +17,7 @@ jobs:
         with:
           python-version: '3.13'
       - run: uv sync
+      - run: uvx ruff check
       - run: |
           cp README.md content
           uv run jupyter lite build
