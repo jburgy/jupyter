@@ -19,7 +19,7 @@ def variable(
         raise ValueError(name + " already created.")
     index = sum(variables.values(), 0)
     variables[name] = size
-    return sparse.eye_array(m=size, n=index + size, k=index, format="csr")
+    return sparse.eye_array(m=size, n=index + size, k=index)
 
 
 def resize(*args: sparse.sparray) -> None:
