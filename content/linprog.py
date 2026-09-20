@@ -2,9 +2,11 @@
 
 from scipy import sparse
 
+_VARIABLES: dict[str, int] = {}
+
 
 def variable(
-    name: str, size: int, variables: dict[str, int] = {}
+    name: str, size: int, variables: dict[str, int] | None = None
 ) -> sparse.sparray:
     """Create a new variable in the program.
 
@@ -15,6 +17,8 @@ def variable(
     Returns:
         A sparse array representing the variable.
     """
+    if variables is None:
+        variables = _VARIABLES
     if name in variables:
         raise ValueError(name + " already created.")
     index = sum(variables.values(), 0)
