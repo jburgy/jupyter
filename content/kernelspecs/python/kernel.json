@@ -1,0 +1,9 @@
+{
+    "argv": [],
+    "display_name": "Python (Pyodide)",
+    "language": "python",
+    "metadata": {
+        "debugger": false
+    },
+    "name": "python"
+}
