@@ -21,7 +21,10 @@ jobs:
       - run: |
           cp README.md content
           uv run jupyter lite build
-      - run: cp service-worker.js dist/
+      - run: |
+          cp service-worker.js dist/
+          mkdir -p dist/kernelspecs
+          cp -R content/kernelspecs/. dist/kernelspecs/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
